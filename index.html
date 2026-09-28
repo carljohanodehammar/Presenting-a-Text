@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presenting a Text, Jönköping University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#961B81;
+    --purple-deep:#6B1260;
+    --purple-tint:#F9F0F7;
+    --ink:#333333;
+    --grey:#888888;
+    --line:#E4E4E4;
+    --bg:#FFFFFF;
+    --soft:#FAFAFA;
+    --advl:#FFF0D6;
+    --subj:#DCEEF9;
+    --obj:#E3F2E3;
+    --hedge:#FFE6F0;
+    --green:#1F8A4A;
+    --green-bg:#E8F5EE;
+    --green-ink:#0F5C2E;
+    --red:#B83232;
+    --red-bg:#FBE9E9;
+    --red-ink:#7A1F1F;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--purple);text-decoration:none;border-bottom:1px solid var(--purple)}
+  a:hover{color:var(--purple-deep);border-bottom-color:var(--purple-deep)}
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-family:"DM Sans",system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey)}
+  h1,h2,h3{font-family:"Playfair Display",Georgia,serif;color:var(--ink);font-weight:700;line-height:1.15}
+  h1{font-size:clamp(40px,6vw,72px);margin:0 0 24px;letter-spacing:-0.01em}
+  h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 14px}
+  h3{font-size:20px;font-weight:600;margin:0 0 8px;font-family:"DM Sans",system-ui,sans-serif;letter-spacing:0.01em}
+  p{margin:0 0 14px}
+  .lead{font-size:21px;line-height:1.5;color:var(--ink)}
+  .small{font-family:"DM Sans",system-ui,sans-serif;font-size:14px;color:var(--grey)}
+  /* hero */
+  .hero{padding:88px 0 56px;border-bottom:1px solid var(--line)}
+  .hero h1 em{font-style:italic;color:var(--purple);font-weight:500}
+  .hero .sub{font-size:21px;color:var(--ink);max-width:660px;line-height:1.5}
+  .duel{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:48px 0 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .duel > div{padding:28px 24px 28px 0}
+  .duel > div + div{padding:28px 0 28px 24px;border-left:1px solid var(--line)}
+  .duel .label{font-family:"DM Sans",system-ui,sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey);margin-bottom:8px}
+  .duel .quote{font-family:"Playfair Display",Georgia,serif;font-size:22px;line-height:1.3;font-style:italic}
+  .duel .you{color:var(--purple);font-weight:700;font-style:normal}
+  .duel .them{color:#B8B8B8}
+  /* section */
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:0}
+  .num{font-family:"DM Sans",system-ui,sans-serif;font-size:13px;letter-spacing:0.18em;color:var(--purple);font-weight:500;text-transform:uppercase;margin-bottom:18px}
+  /* cards */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:18px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--soft);border-left:3px solid var(--purple);padding:18px 20px 16px;border-radius:0 6px 6px 0}
+  .card h3{color:var(--purple-deep);margin-bottom:6px}
+  .card p{margin:0;font-size:16.5px;line-height:1.5}
+  /* steps */
+  ol.steps{counter-reset:step;list-style:none;padding:0;margin:24px 0 0}
+  ol.steps li{counter-increment:step;padding:18px 0 22px;border-top:1px solid var(--line);display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:start}
+  ol.steps li:last-child{border-bottom:1px solid var(--line)}
+  ol.steps li::before{content:counter(step,decimal-leading-zero);font-family:"Playfair Display",serif;font-size:34px;color:var(--purple);font-weight:500;font-style:italic;line-height:1;grid-row:1 / span 2}
+  ol.steps h3{margin:0 0 4px;font-size:19px;font-family:"DM Sans",system-ui,sans-serif;font-weight:700;color:var(--ink)}
+  ol.steps p{margin:0;font-size:16.5px}
+  /* generic reveal block */
+  .block{margin-top:22px;background:var(--soft);padding:24px;border-radius:6px;border:1px solid var(--line)}
+  .block + .block{margin-top:18px}
+  .block .sent{font-family:"Source Serif 4",Georgia,serif;font-size:21px;line-height:1.7;margin-bottom:14px}
+  .blabel{font-family:"DM Sans",system-ui,sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);font-weight:500;margin-bottom:8px}
+  button.btn{font-family:"DM Sans",system-ui,sans-serif;font-size:14px;font-weight:500;letter-spacing:0.04em;background:var(--purple);color:#fff;border:0;padding:10px 16px;border-radius:4px;cursor:pointer;transition:background 0.15s}
+  button.btn:hover{background:var(--purple-deep)}
+  button.btn.ghost{background:transparent;color:var(--purple);border:1px solid var(--purple)}
+  button.btn.ghost:hover{background:var(--purple-tint);color:var(--purple-deep)}
+  button.btn[disabled]{opacity:0.4;cursor:not-allowed}
+  button.btn[disabled]:hover{background:var(--purple)}
+  .ctrl{margin-top:6px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .gloss{margin-top:18px;background:#fff;border:1px solid var(--line);padding:16px 18px;border-radius:4px;font-size:16px}
+  .gloss h4{margin:0 0 8px;font-family:"DM Sans",system-ui,sans-serif;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);font-weight:600}
+  .gloss p{margin:0 0 8px;font-size:15.5px;line-height:1.5}
+  .gloss p:last-child{margin:0}
+  .hide{display:none}
+  /* constituent marking */
+  .sent .advl{background:var(--advl);padding:2px 4px;border-radius:3px}
+  .sent .subj{background:var(--subj);padding:2px 4px;border-radius:3px}
+  .sent .vp{background:var(--purple);color:#fff;padding:2px 5px;border-radius:3px;font-weight:600}
+  .sent .obj{background:var(--obj);padding:2px 4px;border-radius:3px}
+  .sent .sub{border-bottom:1px dotted var(--grey)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-family:"DM Sans",system-ui,sans-serif;font-size:13px;color:var(--ink);margin-top:12px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{display:inline-block;width:14px;height:14px;border-radius:3px;background:#ddd}
+  .legend i.a{background:var(--advl)}
+  .legend i.s{background:var(--subj)}
+  .legend i.v{background:var(--purple)}
+  .legend i.o{background:var(--obj)}
+  /* matrix */
+  .scroller{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:6px}
+  table.matrix{border-collapse:collapse;width:100%;min-width:640px;font-family:"DM Sans",system-ui,sans-serif;font-size:14.5px;background:#fff}
+  table.matrix th,table.matrix td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  table.matrix thead th{background:var(--purple-tint);color:var(--purple-deep);font-size:12.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700}
+  table.matrix tbody th{font-weight:700;color:var(--purple-deep);white-space:nowrap;background:var(--soft)}
+  table.matrix tbody tr:last-child th,table.matrix tbody tr:last-child td{border-bottom:0}
+  table.matrix td em{font-style:italic;color:var(--ink)}
+  /* decoder read-out */
+  .readout{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:680px){.readout{grid-template-columns:1fr 1fr}}
+  .readout div{background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+  .readout .k{font-family:"DM Sans",system-ui,sans-serif;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);display:block;margin-bottom:4px}
+  .readout .v{font-family:"DM Sans",system-ui,sans-serif;font-size:16px;font-weight:700;color:var(--purple-deep)}
+  /* multiple choice */
+  .q{margin-top:22px;background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:22px 24px}
+  .q + .q{margin-top:18px}
+  .q .sent{font-size:19px;line-height:1.6;margin-bottom:12px}
+  .q .sent .target{color:var(--purple);font-weight:600;border-bottom:2px solid var(--purple);padding-bottom:1px}
+  .q .qtext{font-family:"DM Sans",system-ui,sans-serif;font-size:14px;color:var(--ink);margin-bottom:10px;font-weight:500}
+  .q .opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:4px;padding:11px 14px;margin-bottom:8px;font-family:"DM Sans",system-ui,sans-serif;font-size:14.5px;color:var(--ink);cursor:pointer;transition:all 0.15s}
+  .q .opt:hover{border-color:var(--purple);background:var(--purple-tint)}
+  .q .opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green-ink)}
+  .q .opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red-ink)}
+  .q .opt.disabled{cursor:default;opacity:0.55}
+  .q .opt.disabled:hover{border-color:var(--line);background:#fff}
+  .q .fb{margin-top:10px;font-size:14.5px;font-family:"DM Sans",system-ui,sans-serif;color:var(--ink);background:#fff;border-left:3px solid var(--purple);padding:10px 14px;border-radius:0 4px 4px 0}
+  /* writing tasks */
+  .task{margin-top:22px;background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:22px 24px}
+  .task + .task{margin-top:18px}
+  .task .source{background:#fff;border-left:3px solid var(--purple);padding:14px 16px;border-radius:0 4px 4px 0;font-size:17.5px;line-height:1.6;margin-bottom:14px}
+  .task .prompt{font-family:"DM Sans",system-ui,sans-serif;font-size:14px;font-weight:500;margin-bottom:10px}
+  .task textarea{width:100%;min-height:96px;font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.5;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:12px 14px;background:#fff;resize:vertical}
+  .task textarea:focus{outline:2px solid var(--purple);outline-offset:1px;border-color:var(--purple)}
+  .task .counthint{font-family:"DM Sans",system-ui,sans-serif;font-size:12.5px;color:var(--grey);margin-top:8px}
+  .verdict{display:grid;gap:12px;margin-top:16px}
+  .verdict div{border-radius:4px;padding:13px 16px;font-family:"DM Sans",system-ui,sans-serif;font-size:14.5px;line-height:1.5}
+  .verdict .strong{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green-ink)}
+  .verdict .weak{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red-ink)}
+  .verdict .why{background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .verdict b{font-weight:700;display:block;margin-bottom:3px;letter-spacing:0.02em}
+  /* warning card */
+  .warn{margin-top:22px;background:var(--purple-tint);border-left:3px solid var(--purple);padding:18px 22px;border-radius:0 6px 6px 0}
+  .warn h3{color:var(--purple-deep);margin-bottom:6px}
+  .warn p{margin:0 0 10px;font-size:16.5px;line-height:1.55}
+  .warn p:last-child{margin:0}
+  ul.bullets{padding-left:1.1em;margin:14px 0 0}
+  ul.bullets li{margin-bottom:8px;font-size:16.5px;line-height:1.5}
+  /* closing */
+  .closing{padding:60px 0 84px;border-top:3px solid var(--purple)}
+  .closing p{font-size:18px;max-width:660px}
+  .footnote{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-family:"DM Sans",system-ui,sans-serif;font-size:12.5px;color:var(--grey);letter-spacing:0.02em}
+  ::selection{background:var(--purple-tint);color:var(--purple-deep)}
+  :focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:2px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* word picker, used to choose the main verb inside a sentence */
+  .q .sent button.w{font-family:"Source Serif 4",Georgia,serif;font-size:inherit;line-height:inherit;color:var(--purple-deep);background:var(--purple-tint);border:1px solid #E8CFE3;border-radius:4px;padding:1px 6px;cursor:pointer;transition:all 0.15s}
+  .q .sent button.w:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
+  .q .sent button.w.correct{background:var(--green-bg);border-color:var(--green);color:var(--green-ink)}
+  .q .sent button.w.wrong{background:var(--red-bg);border-color:var(--red);color:var(--red-ink)}
+  .q .sent button.w.disabled{cursor:default;opacity:0.55}
+  .q .sent button.w.disabled:hover{background:var(--purple-tint);color:var(--purple-deep);border-color:#E8CFE3}
+
+  /* series strip under the hero */
+  .series{font-family:"DM Sans",system-ui,sans-serif;font-size:14px;color:var(--grey);margin-top:28px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+  .series b{color:var(--ink);font-weight:500;letter-spacing:0.12em;text-transform:uppercase;font-size:12px;margin-right:4px}
+  .series .here{color:var(--purple-deep);font-weight:700}
+  .series .sep{color:#C8C8C8}
+
+  /* item banks: header row with score and a new set button */
+  .bank{margin-top:22px}
+  .bankbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+  .score{font-family:"DM Sans",system-ui,sans-serif;font-size:14px;color:var(--grey)}
+  .score b{color:var(--purple-deep)}
+
+  /* three-way sort */
+  .sortitem .sent{font-size:19px;line-height:1.55;margin-bottom:12px}
+  .choices{display:flex;flex-wrap:wrap;gap:8px}
+  .choices .opt{display:inline-block;width:auto;margin:0}
+
+  /* pair choice */
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:680px){.pair{grid-template-columns:1fr}}
+  .pair .opt{height:100%;margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:16.5px;line-height:1.5}
+
+  /* sentence builder */
+  .builder{margin-top:22px;background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:22px 24px}
+  .brow{margin-bottom:16px}
+  .brow .blabel{margin-bottom:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:"Source Serif 4",Georgia,serif;font-size:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:7px 14px;cursor:pointer;color:var(--ink);transition:all 0.15s}
+  .chip:hover{border-color:var(--purple);background:var(--purple-tint)}
+  .chip.on{background:var(--purple);border-color:var(--purple);color:#fff}
+  .assembled{background:#fff;border-left:3px solid var(--purple);padding:14px 16px;border-radius:0 4px 4px 0;font-size:18px;line-height:1.6;min-height:56px;margin:4px 0 12px;color:var(--ink)}
+  .assembled .gap{color:#B8B8B8;font-style:italic}
+
+  /* short passages and study cards */
+  .passage{background:#fff;border-left:3px solid var(--purple);padding:14px 16px;border-radius:0 4px 4px 0;font-size:17.5px;line-height:1.6;margin-bottom:12px}
+  .study{background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin-bottom:14px}
+  .study h3{margin:0 0 10px;color:var(--purple-deep)}
+  .study dl{display:grid;grid-template-columns:140px 1fr;gap:6px 14px;margin:0;font-size:16px;line-height:1.5}
+  @media(max-width:560px){.study dl{grid-template-columns:1fr}}
+  .study dt{font-family:"DM Sans",system-ui,sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);padding-top:3px}
+  .study dd{margin:0}
+
+  /* self-check list */
+  .checks{margin:14px 0 4px;padding:0;list-style:none}
+  .checks li{margin-bottom:8px}
+  .checks label{display:flex;gap:10px;align-items:flex-start;font-family:"DM Sans",system-ui,sans-serif;font-size:14.5px;line-height:1.45;cursor:pointer}
+  .checks input{margin-top:3px;accent-color:var(--purple);width:16px;height:16px;flex:none}
+
+  /* frames */
+  .frames{margin:18px 0 0;padding:0;list-style:none}
+  .frames li{background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px 14px;margin-bottom:8px;font-size:17px}
+  .frames li i{color:var(--purple-deep);font-style:normal;font-weight:600}
+
+  /* three appeals */
+  .appeals{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+  @media(max-width:760px){.appeals{grid-template-columns:1fr}}
+  .appeal{background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:18px 18px 14px}
+  .appeal .aname{font-family:"DM Sans",system-ui,sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;display:inline-block;padding:3px 9px;border-radius:12px;color:#fff;margin-bottom:10px}
+  .appeal .aq{font-family:"Playfair Display",Georgia,serif;font-size:21px;font-style:italic;line-height:1.25;margin-bottom:10px}
+  .appeal p{margin:0;font-size:16px;line-height:1.5}
+  .a-ethos .aname{background:#2E7F7C}
+  .a-pathos .aname{background:#9A6B00}
+  .a-logos .aname{background:#003865}
+
+  /* signals of understanding */
+  .signals{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  @media(max-width:680px){.signals{grid-template-columns:1fr}}
+  .sig{border-radius:6px;padding:18px 20px 8px}
+  .sig h3{margin-bottom:4px}
+  .sig.yes{background:var(--green-bg)}
+  .sig.yes h3{color:var(--green-ink)}
+  .sig.no{background:var(--red-bg)}
+  .sig.no h3{color:var(--red-ink)}
+  .sig ul.bullets li{font-size:16px}
+  .q .opt.lefty{font-family:"Source Serif 4",Georgia,serif;font-size:16.5px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Speaking / Part one</div>
+    <h1>Explain it for someone who has <em>not</em> read it.</h1>
+    <p class="sub">You have read the text several times. Your listeners have not read it at all. This guide is about the distance between the two: how to make your message clear, your purpose visible and your context enough, and how to see while you speak whether your listeners are still with you.</p>
+    <div class="duel">
+      <div>
+        <div class="label">An opening for listeners</div>
+        <div class="quote you">This study asks a simple question: do students who sleep more get better marks? The short answer is yes, but only a little.</div>
+      </div>
+      <div>
+        <div class="label">What often gets said instead</div>
+        <div class="quote them">The article investigates the correlation between sleep duration and academic performance indicators among undergraduate populations.</div>
+      </div>
+    </div>
+    <div class="series">
+      <b>Speaking</b>
+      <span class="here">Presenting a Text: explain it for someone who has not read it</span>
+      <span class="sep">/</span>
+      <a href="https://carljohanodehammar.github.io/Signposting-Language/">Signposting Language: show your listeners where you are</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section>
+  <div class="num">01 / Three appeals</div>
+  <h2>Your listeners ask three silent questions.</h2>
+  <p class="lead">More than two thousand years ago, Aristotle described three ways a speaker wins an audience. He called them ethos, pathos and logos. The names are old, but the questions behind them are the ones every listener still asks, usually without saying them aloud. A good presentation answers all three.</p>
+  <div class="appeals">
+    <div class="appeal a-ethos"><div class="aname">Ethos</div><div class="aq">Why should I trust you?</div><p>Trust in the speaker and the source. You build it by knowing the text, reporting it fairly, naming the author and being honest about limits, including your own.</p></div>
+    <div class="appeal a-pathos"><div class="aname">Pathos</div><div class="aq">Why should I care?</div><p>Connection with the listeners. In academic speaking this is not drama. It is relevance: an example from their lives, a question to think about, a voice that shows the point matters.</p></div>
+    <div class="appeal a-logos"><div class="aname">Logos</div><div class="aq">Why is this true?</div><p>Reasons and evidence. A clear claim, the evidence behind it, and a sentence that explains why the evidence supports the claim. A clear order is part of logos too.</p></div>
+  </div>
+  <div class="warn">
+    <h3>They work together</h3>
+    <p>Logos without pathos is correct but nobody listens. Pathos without logos is manipulation, and an academic audience notices. Neither works if the listeners do not trust you. When you read a text, you can use the same three questions to judge how the author tries to convince you.</p>
+  </div>
+  <div class="bank" id="bank-appeals">
+    <div class="bankbar"><div class="blabel">Which appeal does each sentence from a presentation mainly use?</div></div>
+    <div class="bankbar"><span class="score" data-score></span><button class="btn ghost" data-new>New set</button></div>
+    <div data-items></div>
+  </div>
+</section>
+
+<section>
+  <div class="num">02 / One clear message</div>
+  <h2>Before you plan anything, say the whole text in one sentence.</h2>
+  <p class="lead">A listener hears your presentation once and cannot go back. If they remember one sentence, which one should it be? That sentence is your message. It is not the topic, which only says what the text is about. It is what the text says about the topic, and ideally why that matters.</p>
+  <div class="grid2">
+    <div class="card"><h3>Topic</h3><p>The text is about sleep and students' marks.</p></div>
+    <div class="card"><h3>Message</h3><p>Students who sleep more get slightly better marks, so sleep is part of studying, not a break from it.</p></div>
+  </div>
+  <ol class="steps">
+    <li><div><h3>Find the claim</h3><p>What does the author say is true, or what did the study find? Look for the verb: <em>found</em>, <em>shows</em>, <em>argues</em>, <em>concludes</em>.</p></div></li>
+    <li><div><h3>Keep the size of the claim</h3><p>If the text says <em>slightly</em>, <em>may</em> or <em>in this group</em>, your message says it too. A message that is bigger than the text damages your ethos.</p></div></li>
+    <li><div><h3>Add why it matters</h3><p>One short phrase that links the claim to your listeners. This is where logos meets pathos.</p></div></li>
+    <li><div><h3>Say it early and say it again</h3><p>Give the message near the start and repeat it at the end. In writing this would be repetition. In speaking it is help.</p></div></li>
+  </ol>
+  <div class="bank" id="bank-message">
+    <div class="bankbar"><div class="blabel">Which sentence gives a message, not just a topic or a detail?</div></div>
+    <div class="bankbar"><span class="score" data-score></span><button class="btn ghost" data-new>New set</button></div>
+    <div data-items></div>
+  </div>
+  <div class="bank" id="bank-pick">
+    <div class="bankbar"><div class="blabel">Read the short summary of an invented study. Choose the best one-sentence message.</div></div>
+    <div class="bankbar"><span class="score" data-score></span><button class="btn ghost" data-new>New set</button></div>
+    <div data-items></div>
+  </div>
+</section>
+
+<section>
+  <div class="num">03 / Purpose made visible</div>
+  <h2>Say what the text is trying to do, and what you are trying to do.</h2>
+  <p class="lead">Every text has a purpose. It may inform, persuade, warn, or correct a belief that many people hold. Listeners understand the details much better once they know the purpose, because they know what the details are for. You have a purpose too: usually to help your listeners understand the text well enough to discuss it. Say both aloud.</p>
+  <div class="scroller">
+    <table class="matrix">
+      <thead><tr><th>Purpose</th><th>Words that often show it</th><th>How you can say it</th></tr></thead>
+      <tbody>
+        <tr><th>Inform</th><td><em>describes, explains, presents, outlines</em></td><td>The article explains how ...</td></tr>
+        <tr><th>Persuade</th><td><em>should, must, we argue, recommend, it is time to</em></td><td>The author wants to convince us that ...</td></tr>
+        <tr><th>Warn</th><td><em>risk, danger, caution, may harm, could lose</em></td><td>The author warns that ...</td></tr>
+        <tr><th>Correct a belief</th><td><em>many people believe, it is often said, contrary to, in fact</em></td><td>The author shows that a common idea is wrong: ...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="frames">
+    <li><i>The author's purpose:</i> The article tries to show that ... The clearest sign of this is ...</li>
+    <li><i>Your purpose:</i> My aim today is to explain ... so that we can discuss ...</li>
+    <li><i>Both together:</i> The author wants to warn us about ... I want to show you where I think the warning is strong, and where it goes too far.</li>
+  </ul>
+  <div class="bank" id="bank-purpose">
+    <div class="bankbar"><div class="blabel">What is the main purpose of each invented passage?</div></div>
+    <div class="bankbar"><span class="score" data-score></span><button class="btn ghost" data-new>New set</button></div>
+    <div data-items></div>
+  </div>
+</section>
+
+<section>
+  <div class="num">04 / Enough context</div>
+  <h2>Give the background your listeners need, and no more.</h2>
+  <p class="lead">Context is what a listener needs to know before your message makes sense. Too little, and they are lost from the first minute: you use words and names they have never met. Too much, and the message disappears under details that only matter to someone who will read the whole text. The test is simple. Does the listener need this now, to follow what comes next?</p>
+  <div class="grid2">
+    <div class="card"><h3>Usually needed</h3><p>The topic in plain words. Who was studied, where, and roughly how. Any key term, explained with an example. Why the question matters to these listeners.</p></div>
+    <div class="card"><h3>Usually not needed</h3><p>Exact dates, every number in a table, the full list of methods, the history of the field. If someone asks, you can give it then.</p></div>
+  </div>
+  <div class="bank" id="bank-context">
+    <div class="bankbar"><div class="blabel">Is each sentence useful context, does it assume too much, or is it too much detail for now?</div></div>
+    <div class="bankbar"><span class="score" data-score></span><button class="btn ghost" data-new>New set</button></div>
+    <div data-items></div>
+  </div>
+</section>
+
+<section>
+  <div class="num">05 / Adapt to your audience</div>
+  <h2>Turn written sentences into spoken ones.</h2>
+  <p class="lead">A reader can read a sentence twice, see the headings and look up a word. A listener hears everything once, at your speed. Academic writing packs a lot of meaning into long noun phrases. Speaking unpacks it again. You do not make the ideas simpler. You make the sentences easier to follow.</p>
+  <div class="scroller">
+    <table class="matrix">
+      <thead><tr><th>Move</th><th>Written</th><th>Spoken</th></tr></thead>
+      <tbody>
+        <tr><th>Nouns become verbs</th><td><em>the provision of feedback</em></td><td>when teachers give feedback</td></tr>
+        <tr><th>One idea per sentence</th><td><em>A survey of 400 employees revealed increased hours.</em></td><td>They asked 400 people. Most said they worked longer.</td></tr>
+        <tr><th>Terms explained</th><td><em>retrieval practice</em></td><td>testing yourself, for example closing your notes and writing what you remember</td></tr>
+        <tr><th>Numbers made meaningful</th><td><em>r = 0.21</em></td><td>a small link, not a strong one</td></tr>
+        <tr><th>Link to the listener</th><td><em>implications for student populations</em></td><td>this matters for us, because ...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="bank" id="bank-spoken">
+    <div class="bankbar"><div class="blabel">Which version works better for listeners?</div></div>
+    <div class="bankbar"><span class="score" data-score></span><button class="btn ghost" data-new>New set</button></div>
+    <div data-items></div>
+  </div>
+</section>
+
+<section>
+  <div class="num">06 / Is the audience with you?</div>
+  <h2>Watch, check, and adjust while you speak.</h2>
+  <p class="lead">A presentation is not finished when it is planned. While you speak, your listeners are telling you whether they understand, mostly without words. A good speaker looks up from the notes often enough to see this, checks with a real question, and changes something when the signs say the listeners are lost.</p>
+  <div class="signals">
+    <div class="sig yes"><h3>Signs they are with you</h3><ul class="bullets"><li>They look at you and at each other when you make a point.</li><li>They nod, or write something down after a key sentence.</li><li>They react at the right moment, for example to a surprising result.</li><li>Their questions build on what you said.</li><li>They can answer a check question in their own words.</li></ul></div>
+    <div class="sig no"><h3>Signs you are losing them</h3><ul class="bullets"><li>Blank faces, or eyes on phones and on the window.</li><li>Frowning at a word or a number.</li><li>Nobody reacts where you expected a reaction.</li><li>They ask about something you explained a minute ago.</li><li>Silence after <em>Any questions?</em></li></ul></div>
+  </div>
+  <ol class="steps">
+    <li><div><h3>Watch</h3><p>Look up after every main point. Look at every listener, not only the friendliest face.</p></div></li>
+    <li><div><h3>Check</h3><p><em>Do you understand?</em> almost always gets a polite yes. Ask something that needs a real answer: <em>Which of the two results surprised you more?</em></p></div></li>
+    <li><div><h3>Adjust</h3><p>Slow down. Say it another way. Give an example. Repeat the main point. Cut a detail if time is short.</p></div></li>
+  </ol>
+  <div class="bank" id="bank-scenario">
+    <div class="bankbar"><div class="blabel">You are presenting. What is the best thing to do?</div></div>
+    <div class="bankbar"><span class="score" data-score></span><button class="btn ghost" data-new>New set</button></div>
+    <div data-items></div>
+  </div>
+  <div class="bank" id="bank-check">
+    <div class="bankbar"><div class="blabel">Which question checks understanding better?</div></div>
+    <div class="bankbar"><span class="score" data-score></span><button class="btn ghost" data-new>New set</button></div>
+    <div data-items></div>
+  </div>
+</section>
+
+<section>
+  <div class="num">07 / Put it together</div>
+  <h2>Write the first minute of a presentation.</h2>
+  <p class="lead">The first minute carries most of the weight. It gives the context, the message and the purpose, and it decides whether the listeners trust you enough to keep listening. Read the invented study card. Then write what you would say in your first minute to listeners who have not read the text. Write it as you would say it, not as you would write an essay.</p>
+  <div class="task" id="practice">
+    <div data-study></div>
+    <div class="ctrl" style="margin:-4px 0 14px"><button class="btn ghost" data-new>New study</button></div>
+    <div class="prompt">Include: enough context, the message in one sentence, the author's purpose, your own purpose, and one question that checks understanding.</div>
+    <textarea aria-label="Your first minute"></textarea>
+    <div class="counthint"></div>
+    <div class="hide" data-checkwrap>
+      <ul class="checks">
+        <li><label><input type="checkbox"> A listener who has not read the text would know the topic and the setting after my first two sentences.</label></li>
+        <li><label><input type="checkbox"> My message is one sentence, and it states a claim, not only a topic.</label></li>
+        <li><label><input type="checkbox"> My message is no bigger than the finding. Words like <em>slightly</em> or <em>in this group</em> are kept.</label></li>
+        <li><label><input type="checkbox"> I name the author's purpose and my own purpose.</label></li>
+        <li><label><input type="checkbox"> I explain any term a listener may not know, and I turn numbers into words.</label></li>
+        <li><label><input type="checkbox"> My check question needs a real answer, not yes or no.</label></li>
+      </ul>
+      <div class="ctrl"><button class="btn" data-reveal>Compare with a model</button></div>
+    </div>
+    <div class="verdict hide" data-verdict></div>
+  </div>
+</section>
+
+</div>
+
+<div class="wrap">
+  <div class="closing">
+    <div class="num">Where this leads</div>
+    <h2>From a clear message to a clear route.</h2>
+    <p>Much of this guide rests on reading you have already practised. Finding a writer's position, audience and purpose is where <a href="https://carljohanodehammar.github.io/Reading-Strategies-1/">Reading Strategies 1</a> began, and giving a fair opinion of a text, anchored in something the text contains, is the core of <a href="https://carljohanodehammar.github.io/Source-Evaluation-2/">Source Evaluation 2</a>. Speaking adds one new demand: everything has to work the first time it is heard.</p>
+    <p>The next step is the route through your presentation. Listeners cannot see your headings, so you have to say them: where you are, where you are going and when you have arrived. The companion page, <a href="https://carljohanodehammar.github.io/Signposting-Language/">Signposting Language</a>, is a phrasebank you can practise with, memorise from and use to build your own notes card.</p>
+    <p>Until then, one question before every presentation. If my listeners remember only one sentence, which one will it be?</p>
+    <div class="footnote">All studies, authors and figures in this guide are invented for practice. Carl Johan Odehammar, Jönköping University</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- helpers ----------
+  function shuffle(a){
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function el(tag, cls, text){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  // Draw a set with the categories as evenly spread as the pool allows, then mix the order.
+  function balanced(pool, n, keyOf){
+    var groups = {};
+    shuffle(pool).forEach(function(it){ var k = keyOf(it); (groups[k] = groups[k] || []).push(it); });
+    var keys = shuffle(Object.keys(groups)), out = [];
+    while (out.length < n && keys.some(function(k){ return groups[k].length; })){
+      keys.forEach(function(k){ if (out.length < n && groups[k].length) out.push(groups[k].shift()); });
+    }
+    return shuffle(out);
+  }
+
+  // ---------- generic bank of one-answer questions ----------
+  // Each item becomes { lead: optional passage, text: sentence or prompt, opts: [{t, ok, why}], row: bool }
+  function makeBank(rootId, pool, perSet, toQuestion, keyOf){
+    var root = document.getElementById(rootId);
+    if (!root) return;
+    var list = root.querySelector("[data-items]");
+    var scoreEl = root.querySelector("[data-score]");
+    var answered = 0, correct = 0, total = 0;
+
+    function updateScore(){
+      scoreEl.innerHTML = answered === 0
+        ? "Set of " + total + ". A new set draws different items."
+        : "<b>" + correct + "</b> of " + answered + " right so far, " + (total - answered) + " left in this set.";
+    }
+
+    function render(){
+      list.innerHTML = "";
+      answered = 0; correct = 0;
+      var chosen = keyOf ? balanced(pool, perSet, keyOf) : shuffle(pool).slice(0, perSet);
+      total = chosen.length;
+      chosen.forEach(function(item){
+        var q = toQuestion(item);
+        var box = el("div", "q" + (q.cls ? " " + q.cls : ""));
+        if (q.lead){ var p = el("div", "passage"); p.textContent = q.lead; box.appendChild(p); }
+        if (q.text){ var s = el("p", "sent"); s.textContent = q.text; box.appendChild(s); }
+        if (q.prompt){ box.appendChild(el("div", "qtext", q.prompt)); }
+        var wrap = el("div", q.wrap || "");
+        var opts = q.keepOrder ? q.opts : shuffle(q.opts);
+        var buttons = [];
+        opts.forEach(function(o){
+          var b = el("button", "opt", o.t);
+          b.type = "button";
+          b.addEventListener("click", function(){
+            if (box.querySelector(".fb")) return;
+            buttons.forEach(function(x){ x.disabled = true; if (x !== b) x.classList.add("disabled"); });
+            b.classList.add(o.ok ? "correct" : "wrong");
+            if (!o.ok){
+              buttons.forEach(function(x, i){ if (opts[i].ok){ x.classList.remove("disabled"); x.classList.add("correct"); } });
+            }
+            var fb = el("div", "fb", o.why);
+            box.appendChild(fb);
+            answered++; if (o.ok) correct++;
+            updateScore();
+          });
+          buttons.push(b);
+          wrap.appendChild(b);
+        });
+        box.appendChild(wrap);
+        list.appendChild(box);
+      });
+      updateScore();
+    }
+    root.querySelector("[data-new]").addEventListener("click", render);
+    render();
+  }
+
+    // Two versions, one better. Shared by several sections.
+  function pairQuestion(it){
+    return {
+      wrap: "pair",
+      opts: [
+        { t: it[0], ok: true, why: "Correct. " + it[2] },
+        { t: it[1], ok: false, why: "Not quite. " + it[2] }
+      ]
+    };
+  }
+
+  // ---------- 01: ethos, pathos, logos ----------
+  var APPEALS = ["Ethos", "Pathos", "Logos"];
+  var APPEAL_NOTE = [
+    "Ethos: this builds trust in the speaker or the source. ",
+    "Pathos: this connects with the listeners' interests, feelings or experience. ",
+    "Logos: this is about reasons and evidence. "
+  ];
+  var APPEAL_ITEMS = [
+    ["The author has studied language learning for more than twenty years.", 0, "It tells the listeners why the source deserves trust."],
+    ["The article was published in a peer-reviewed journal, so other experts checked it first.", 0, "Where the text was published is a reason to trust it."],
+    ["I am not an expert in statistics, so I will keep to the main results.", 0, "Honesty about your own limits makes listeners trust the rest of what you say."],
+    ["To be fair to the author, she does say that her results are only a first step.", 0, "Reporting the author fairly shows that you can be trusted to describe the text."],
+    ["I am not sure about that point, so I will check and come back to you.", 0, "Admitting uncertainty is a trust signal, not a weakness."],
+    ["The researchers work at a public sleep centre and have no link to companies that sell sleep apps.", 0, "It is about whether the source is independent, which is a question of trust."],
+    ["I read the article three times and looked up the two terms I did not know.", 0, "It shows the listeners that you know the text well."],
+    ["Think about the last time you studied late at night. How did you feel the next morning?", 1, "It asks the listeners to connect the topic to their own experience."],
+    ["Most of us in this room use a language app every week, so this study is about us.", 1, "It shows the listeners why the topic matters to them."],
+    ["Imagine getting feedback on an essay three weeks after you handed it in.", 1, "Imagine invites the listeners to feel the situation."],
+    ["Picture a student who works twenty hours a week and still has four articles to read.", 1, "A concrete person makes the listeners care about the problem."],
+    ["Have you ever read a whole page and then realised you remember nothing?", 1, "A question from shared experience makes the listeners interested."],
+    ["This result surprised me, and I think it will surprise you too.", 1, "It builds interest and expectation in the listeners."],
+    ["For many of us, the bus to campus is the only quiet time of the day.", 1, "It links the topic to the listeners' daily lives."],
+    ["Students who slept more than seven hours scored eight per cent higher on average.", 2, "A number from the study is evidence."],
+    ["The author claims that short daily homework works better, and she supports this with results from two schools.", 2, "A claim and its evidence are named together."],
+    ["Because the two groups were chosen at random, the difference is probably caused by the method.", 2, "It explains why the evidence supports the conclusion."],
+    ["In total, 412 employees answered, and 71 per cent said they worked longer at home.", 2, "Figures from the survey are evidence."],
+    ["This shows that the timing of feedback matters more than its length.", 2, "It draws a conclusion from evidence, which is reasoning."],
+    ["However, the second study found no difference, so the evidence is mixed.", 2, "It weighs two pieces of evidence against each other."],
+    ["The claim is that handwritten notes help memory. The evidence is a test one week later.", 2, "It separates the claim from the evidence behind it."],
+    ["First, the study compared two groups. Second, it measured their scores after six weeks.", 2, "A clear order of steps helps the listeners follow the reasoning."]
+  ];
+  makeBank("bank-appeals", APPEAL_ITEMS, 9, function(it){
+    return {
+      cls: "sortitem", text: it[0], wrap: "choices", keepOrder: true,
+      opts: APPEALS.map(function(c, i){
+        return { t: c, ok: i === it[1], why: (i === it[1] ? "Correct. " : "Not quite. ") + APPEAL_NOTE[it[1]] + it[2] };
+      })
+    };
+  }, function(it){ return it[1]; });
+
+  // ---------- 02: message, not topic ----------
+  var MESSAGE = [
+    ["The study found that students who slept more got slightly better marks, so sleep is part of studying, not a break from it.", "The study is about sleep and students' marks.", "A message says what the text found and why it matters. The other sentence only names the topic."],
+    ["Feedback helps most when students get it quickly and have a chance to use it.", "The article discusses different aspects of feedback in higher education.", "Discusses different aspects tells the listener nothing the text actually says."],
+    ["Working from home made people work longer hours, but not always better ones.", "The survey had 412 participants from six companies.", "The number of participants is a detail of the method. It is useful later, but it is not the message."],
+    ["Language apps help with vocabulary, but they do little for speaking.", "Language apps are very popular, and millions of people use them.", "Popularity is background. The message is what the text says about the apps."],
+    ["Reading on screen works as well as paper for short texts, but not for long, difficult ones.", "Reading is a very important skill for all university students.", "The second sentence is true of any reading text. A message could only come from this one."],
+    ["Short daily homework works better than long weekly tasks for younger pupils.", "Homework has been debated for more than a hundred years.", "History of the debate is context. The message is the text's own answer."],
+    ["Group work improves learning only when every member has a clear role.", "There are many advantages and disadvantages of group work.", "Advantages and disadvantages promises content but gives none."],
+    ["Handwritten notes help students remember ideas, while typed notes help them remember exact words.", "The researchers used a memory test one week after the lecture.", "The test is how the study found its result. The result itself is the message."],
+    ["Music with lyrics makes reading harder, but instrumental music makes little difference.", "Music affects people in many different ways.", "A general statement about music. It does not say what this text found."],
+    ["Ten minutes of exercise before a test improved attention for most participants.", "Exercise is good for your health.", "Everyone already knows this. The message is the specific finding."],
+    ["Plants in offices did not make people work faster, but workers said they felt better.", "The article is interesting and easy to read.", "That is an opinion about the text, not what the text says."],
+    ["Students with long part-time jobs cut down on reading, not on lectures.", "Many students have part-time jobs to pay for their studies.", "Background again. The message tells the listener what the study discovered."]
+  ];
+  makeBank("bank-message", MESSAGE, 5, pairQuestion);
+
+  var PICK = [
+    { lead: "An invented study followed 180 first-year students for one term. Students who got written feedback within three days revised their next essay more often than students who waited three weeks. The difference was small for students who already had high marks.",
+      opts: [["Quick feedback makes students more likely to use it, especially students who are still developing.", true, "Correct. It states the finding, keeps its size, and includes the detail about high-achieving students."],
+             ["This study is about feedback and first-year students.", false, "This is only the topic."],
+             ["The study followed 180 students for one term.", false, "This is a detail of the method."],
+             ["Feedback that comes after three days is useless.", false, "This is bigger than the finding. The study compared three days with three weeks, and the difference was sometimes small."]] },
+    { lead: "An invented survey asked 900 office workers about working from home. Most said they worked longer hours at home. Fewer than half said they got more done.",
+      opts: [["People work longer at home, but that does not mean they get more done.", true, "Correct. Both parts of the finding are kept, and the contrast is the interesting point."],
+             ["Working from home is the future of office work.", false, "The survey does not say this. It is a prediction about the world."],
+             ["The survey had 900 participants.", false, "A detail of the method, not the message."],
+             ["Working from home makes people lazy.", false, "The opposite of the finding: people worked longer."]] },
+    { lead: "An invented experiment asked 60 students to read the same long article, half on paper and half on a tablet. Understanding of the main argument was the same. Memory of details was better on paper.",
+      opts: [["Paper and screens work equally well for the main idea, but paper helps more with details.", true, "Correct. It keeps both results and the difference between them."],
+             ["Reading on paper is better than reading on screens.", false, "Only partly true. For the main argument there was no difference."],
+             ["The article is about reading on paper and on tablets.", false, "This names the topic only."],
+             ["Everyone should print their articles.", false, "A recommendation the study does not make."]] },
+    { lead: "An invented review of 25 studies looked at language apps. Most studies found gains in vocabulary. Very few found any gain in speaking, and most studies lasted less than two months.",
+      opts: [["Language apps seem to help with vocabulary, but there is little evidence that they help with speaking.", true, "Correct. It gives the claim at the right strength: seem to, little evidence."],
+             ["Language apps do not work.", false, "Too strong, and wrong for vocabulary."],
+             ["Most of the studies lasted less than two months.", false, "An important limit, but it is not the message."],
+             ["Language apps are a popular way to learn languages.", false, "Background, not what the review found."]] },
+    { lead: "In an invented study, one group of students re-read their notes before a test and another group tested themselves. One week later, the self-testing group remembered about a third more.",
+      opts: [["Testing yourself helps you remember much more than reading your notes again.", true, "Correct. The claim and the size of the effect are both there, in plain words."],
+             ["The study compared two ways of studying.", false, "This is the design, not the result."],
+             ["Reading your notes is a waste of time.", false, "The study does not show this. Re-reading still produced some memory."],
+             ["Memory is an important part of learning.", false, "True of any text on memory, so it is not this text's message."]] },
+    { lead: "An invented study of three schools found that pupils in classes with a short daily homework task did slightly better in tests than pupils with one long weekly task. The authors say more schools are needed before firm conclusions can be drawn.",
+      opts: [["In three schools, short daily homework gave slightly better results than one long weekly task, but this is only a first result.", true, "Correct. It keeps the small scale and the author's own caution."],
+             ["Daily homework is always better than weekly homework.", false, "Always is much stronger than three schools and slightly better."],
+             ["Three schools took part in the study.", false, "A detail, not the message."],
+             ["Homework has many advantages and disadvantages.", false, "Vague. It says nothing the study found."]] },
+    { lead: "An invented study measured attention in 120 students before a test. Students who did ten minutes of light exercise first paid attention for longer. The effect disappeared after about an hour.",
+      opts: [["A short burst of exercise before a test improves attention, but only for about an hour.", true, "Correct. The finding and its limit are both kept."],
+             ["Exercise makes you smarter.", false, "Much bigger than the finding, which was about attention for about an hour."],
+             ["The study measured attention in 120 students.", false, "The method, not the message."],
+             ["Students should exercise every day.", false, "A recommendation that the study does not make."]] },
+    { lead: "An invented study compared groups that had assigned roles with groups that did not. Groups with roles finished more of the task and reported fewer conflicts. Without roles, a few members did most of the work.",
+      opts: [["Group work goes better when every member has a clear role.", true, "Correct. It states the finding in one clear sentence."],
+             ["Group work should be avoided.", false, "The study does not say this. Groups with roles worked well."],
+             ["The study compared two kinds of group.", false, "The design, not the result."],
+             ["In some groups, a few members did most of the work.", false, "A true detail, but only half the story."]] }
+  ];
+  makeBank("bank-pick", PICK, 3, function(it){
+    return {
+      lead: it.lead, cls: "", wrap: "",
+      opts: it.opts.map(function(o){ return { t: o[0], ok: o[1], why: o[1] ? o[2] : "Not quite. " + o[2] }; })
+    };
+  });
+
+  // ---------- 03: purpose ----------
+  var PURPOSES = ["Inform", "Persuade", "Warn", "Correct a belief"];
+  var PURPOSE_NOTE = [
+    "The text mainly informs. ",
+    "The text mainly tries to persuade. ",
+    "The text mainly warns. ",
+    "The text mainly corrects a common belief. "
+  ];
+  var PURPOSE_ITEMS = [
+    ["This report describes how three schools introduced a four-day week and what changed in the first year.", 0, "Describes and what changed report events without asking the reader to agree or act."],
+    ["The article explains how memory works during sleep, step by step, from the first hour to the morning.", 0, "Explains and step by step show a text that sets out how something works."],
+    ["This review presents the results of twenty studies on commuting and mood, grouped by type of transport.", 0, "Presents the results and grouped by organise information. There is no position to accept."],
+    ["The paper outlines the main types of feedback teachers use and gives an example of each.", 0, "Outlines and gives an example are signs of an informing text."],
+    ["Universities should give every student a quiet place to study. The evidence in this article shows why this cannot wait.", 1, "Should and cannot wait ask the reader to accept a position and act on it."],
+    ["We argue that homework for young pupils must be short, daily and optional.", 1, "We argue and must mark a position the authors want you to share."],
+    ["It is time for employers to accept that working from home is here to stay. This article makes the case for a permanent home-working day.", 1, "It is time and makes the case are persuasion signals."],
+    ["The author recommends that every course replace one lecture a week with a discussion seminar.", 1, "Recommends means the text wants something to change."],
+    ["Language apps may help with vocabulary, but there is a risk that learners stop speaking to real people.", 2, "Risk points to a possible harm. The purpose is to make the reader careful."],
+    ["The authors caution that the benefits of working from home could disappear if people never meet colleagues.", 2, "Caution and could disappear signal a warning."],
+    ["Before schools buy expensive tablets, this article points to several dangers that are rarely discussed.", 2, "Dangers and before schools buy tell the reader to stop and think before acting."],
+    ["The review finds that the effect is small and warns readers not to expect large changes from one app.", 2, "Warns readers not to expect is a warning against overestimating."],
+    ["Many people believe that we learn best in our preferred learning style. This article shows that the evidence does not support this idea.", 3, "Many people believe followed by does not support is the typical shape of a correction."],
+    ["It is often said that multitasking saves time. The results here suggest the opposite.", 3, "It is often said sets up a common belief, and the opposite corrects it."],
+    ["A common view is that reading on a screen is always worse than reading on paper. The study shows that this is only true for long texts.", 3, "A common view is followed by a correction that limits it."],
+    ["Contrary to popular belief, the authors find that students who take short breaks finish their work sooner.", 3, "Contrary to popular belief is a direct signal of correction."]
+  ];
+  makeBank("bank-purpose", PURPOSE_ITEMS, 6, function(it){
+    return {
+      cls: "sortitem", text: it[0], wrap: "choices", keepOrder: true,
+      opts: PURPOSES.map(function(c, i){
+        return { t: c, ok: i === it[1], why: (i === it[1] ? "Correct. " : "Not quite. ") + PURPOSE_NOTE[it[1]] + it[2] };
+      })
+    };
+  }, function(it){ return it[1]; });
+
+  // ---------- 04: context ----------
+  var CONTEXT = ["Useful context", "Assumes too much", "Too much detail for now"];
+  var CONTEXT_NOTE = [
+    "Useful context: listeners need this to follow what comes next. ",
+    "Assumes too much: listeners who have not read the text will not know this. ",
+    "Too much detail: this does not help listeners follow the message now. "
+  ];
+  var CONTEXT_ITEMS = [
+    ["The study was done in Norway, with 300 university students, over one term.", 0, "Where, who and how long, in one sentence. That is enough setting."],
+    ["By retrieval practice, the author means testing yourself instead of reading your notes again.", 0, "A key term explained in plain words before it is used."],
+    ["This matters because most of us study late at night before exams.", 0, "It tells the listeners why the question is relevant to them."],
+    ["The article was written just after many courses moved online.", 0, "The time of writing explains why the question was asked."],
+    ["The author is a psychologist who studies memory.", 0, "Who wrote it helps the listener judge the text."],
+    ["Before I start, a longitudinal study is one that follows the same people over time.", 0, "It prepares the listener for a word that will come up."],
+    ["As everyone knows, the Hawthorne effect explains this result.", 1, "As everyone knows assumes knowledge that most listeners do not have. The term needs explaining."],
+    ["The study used the PSQI, so the data is reliable.", 1, "An abbreviation with no explanation. The listener cannot judge the claim."],
+    ["This builds on the famous forgetting curve, so I will not explain it.", 1, "Famous to whom? If the idea matters, it needs one sentence."],
+    ["Obviously the sample was stratified, which solves the problem.", 1, "Obviously and stratified both assume the listener already knows the method."],
+    ["This is the usual problem with self-report.", 1, "The usual problem is only usual for someone who has read about methods."],
+    ["The authors use the standard model, so the method is clear.", 1, "Clear to the speaker, not to the listener. Which model, and what does it do?"],
+    ["The survey opened on 3 March at nine in the morning and closed on 28 March at midnight.", 2, "The exact dates do not change the message. Roughly one month is enough."],
+    ["The authors thank four colleagues and two funders in the acknowledgements.", 2, "Funding can matter, but the list of thanks does not help the listener now."],
+    ["Table 4 has eleven columns, and I will go through each of them.", 2, "Choose the one number that matters and say what it means."],
+    ["Participant 214 did not answer question 17.", 2, "One missing answer is not something a listener needs."],
+    ["The article has 64 references, and the first one is from 1972.", 2, "Interesting to a reader, not needed by a listener following the message."],
+    ["The questionnaire had 48 items on a seven-point scale, and items 12, 19 and 33 were reversed.", 2, "Method detail at this level belongs in answers to questions, not in the presentation."]
+  ];
+  makeBank("bank-context", CONTEXT_ITEMS, 9, function(it){
+    return {
+      cls: "sortitem", text: it[0], wrap: "choices", keepOrder: true,
+      opts: CONTEXT.map(function(c, i){
+        return { t: c, ok: i === it[1], why: (i === it[1] ? "Correct. " : "Not quite. ") + CONTEXT_NOTE[it[1]] + it[2] };
+      })
+    };
+  }, function(it){ return it[1]; });
+
+  // ---------- 05: spoken or written ----------
+  var SPOKEN = [
+    ["When students get feedback quickly, they use it more.", "The timeliness of feedback provision was positively associated with subsequent uptake.", "The spoken version uses verbs (get, use) instead of long noun phrases, so the listener hears who does what."],
+    ["The researchers asked 400 people. Most of them said they worked longer at home.", "A survey of 400 participants revealed that the majority reported increased working hours in the home environment.", "Two short sentences, one idea each, are easier to follow when heard once."],
+    ["The study has one problem. It only looked at one school. So we cannot be sure the result is the same everywhere.", "The generalisability of the findings is limited by the single-site design.", "The spoken version explains what generalisability means instead of assuming it."],
+    ["There are two main results. The first is about memory. The second is about time.", "The results indicate a number of findings of relevance.", "Numbering the results tells the listener what to expect."],
+    ["Retrieval practice means testing yourself. For example, you close your notes and write down what you remember.", "Retrieval practice was employed as the intervention.", "The term is explained, and an example makes it concrete."],
+    ["Students who slept more got better marks. Not much better, but better.", "Sleep duration exhibited a modest positive correlation with academic attainment.", "Plain words keep the size of the finding: not much better is the spoken form of modest."],
+    ["Why does this matter to us? Because most of us study late at night.", "This has implications for student populations.", "The spoken version links the finding to the listeners in the room."],
+    ["The author wants to change our minds. She thinks homework for young children does more harm than good.", "The author's stance on homework is critical.", "It makes the purpose visible and says what the stance actually is."],
+    ["Let me say that again, because it is the key point: the method mattered more than the time spent.", "It is the method rather than the duration that is significant.", "Repeating and flagging the key point helps a listener, even though a reader would not need it."],
+    ["Imagine two students. One reads her notes again. The other tests herself. After a week, the second remembers more.", "Participants in the testing condition outperformed those in the restudy condition at delayed recall.", "A small scene is easier to hold in mind than conditions and recall."],
+    ["The apps help with words. They do not help much with speaking.", "Vocabulary acquisition was enhanced, whereas oral proficiency gains were negligible.", "The same contrast, in short everyday words."],
+    ["This is a small study, only 40 people. So I see it as a first step, not a final answer.", "Given the limited sample size, the findings should be regarded as preliminary.", "The spoken version gives the number and says in plain words what preliminary means."]
+  ];
+  makeBank("bank-spoken", SPOKEN, 5, pairQuestion);
+
+  // ---------- 06: reading the room ----------
+  var SCENARIOS = [
+    { lead: "Halfway through your second point, two listeners look at their phones and one frowns at the floor.",
+      opts: [["Pause and say: Let me put that more simply. Then give an example.", true, "Correct. The signs say they are lost. Rephrasing with an example gives them a way back in."],
+             ["Speak faster so you finish before they lose interest.", false, "Speed makes a lost listener more lost."],
+             ["Ask: Do you understand?", false, "Most people answer yes to be polite, so you learn nothing."],
+             ["Carry on. It is their job to listen.", false, "The listeners are telling you something. Ignoring it wastes the rest of the presentation."]] },
+    { lead: "You explain a key term. A listener asks you to say it again.",
+      opts: [["Say it again more slowly, then give one example.", true, "Correct. The question shows the term matters and did not land the first time."],
+             ["Say: I already explained that.", false, "It damages trust and does not solve the problem."],
+             ["Read the definition aloud from the article.", false, "The written definition is usually harder than your first explanation."],
+             ["Skip the term so it does not confuse anyone.", false, "If it is a key term, the rest of the presentation depends on it."]] },
+    { lead: "After your main point, your listeners nod and some write something down.",
+      opts: [["Move on, and repeat the main point briefly at the end.", true, "Correct. The signs are good. Keep going, and use the repetition at the end to fix the point."],
+             ["Explain the same point again in more detail.", false, "They have already shown that they understood. More detail now costs time."],
+             ["Stop and ask whether they are sure they understood.", false, "It interrupts a presentation that is working."],
+             ["Add three more details straight away.", false, "The point landed. Extra details can bury it."]] },
+    { lead: "You ask: Any questions? There is silence.",
+      opts: [["Ask a specific question: Which of the two results surprised you more?", true, "Correct. A specific question is easier to answer than an open invitation."],
+             ["Say: Good, then everyone understood. And finish.", false, "Silence is not the same as understanding."],
+             ["Repeat the whole presentation.", false, "You do not yet know which part was unclear."],
+             ["Look at your notes until someone speaks.", false, "Looking away makes it harder for listeners to speak."]] },
+    { lead: "A listener asks about something you explained two minutes ago.",
+      opts: [["Answer briefly, and notice that the point probably needs an example next time.", true, "Correct. The question is information about your explanation, not about the listener."],
+             ["Say: I said that already.", false, "It damages trust, and others may have the same question."],
+             ["Tell them to read the article later.", false, "Helping listeners understand the text is the purpose of the presentation."],
+             ["Ignore the question and continue.", false, "A question you ignore does not go away."]] },
+    { lead: "When you say that the link between sleep and marks was 0.21, several listeners look confused.",
+      opts: [["Say what the number means in words: a small link, not a strong one.", true, "Correct. Listeners need the meaning of the number, not the number itself."],
+             ["Give more numbers from the same table.", false, "More numbers make the confusion bigger."],
+             ["Say that it is statistics and move on.", false, "The listeners still do not know whether the finding is strong or weak."],
+             ["Apologise for the mathematics.", false, "An apology does not explain anything."]] },
+    { lead: "You notice that you have been looking at your notes for a long time, and nobody is looking at you.",
+      opts: [["Look up, pause, and say the main point again to the group.", true, "Correct. Eye contact brings attention back, and the main point is the thing to say when it returns."],
+             ["Read faster to reach the end of the page.", false, "Reading is the cause of the problem."],
+             ["Hold your notes higher so you can read and look at the same time.", false, "The listeners see the paper, not you."],
+             ["Look only at the teacher from now on.", false, "The other listeners are your audience too."]] },
+    { lead: "A listener answers your check question, but the answer shows a misunderstanding.",
+      opts: [["Thank them, then explain the point another way, with a different example.", true, "Correct. The check worked: it found the problem. Now change the explanation, not the words."],
+             ["Say: No, that is wrong. And move on.", false, "The misunderstanding stays, and nobody will answer your next question."],
+             ["Ask someone else and hope for a better answer.", false, "Others may share the misunderstanding."],
+             ["Repeat exactly the same explanation, louder.", false, "The same explanation already failed once."]] },
+    { lead: "You are about to start your third point, and you have one minute left.",
+      opts: [["Give the third point in one sentence, then go to your conclusion.", true, "Correct. The conclusion and the main message are what listeners remember. Protect them."],
+             ["Speak much faster to fit everything in.", false, "Fast speech in the last minute means nothing is remembered."],
+             ["Skip the conclusion.", false, "The conclusion repeats the message, which is the most important sentence."],
+             ["Continue as planned and finish late.", false, "It takes time from other speakers and loses the listeners' attention."]] },
+    { lead: "After your example, two listeners whisper to each other and point at their notes.",
+      opts: [["Invite them in: Did the example make you think of something?", true, "Correct. Whispering after an example is often a sign of thinking, not of boredom. Bringing it into the group helps everyone."],
+             ["Stop and ask them to be quiet.", false, "They may be connecting your example to something useful."],
+             ["Pretend not to see it.", false, "You miss a chance to start the discussion."],
+             ["Speak louder so they stop.", false, "It treats a possible sign of interest as a problem."]] }
+  ];
+  makeBank("bank-scenario", SCENARIOS, 4, function(it){
+    return {
+      lead: it.lead,
+      opts: it.opts.map(function(o){ return { t: o[0], ok: o[1], why: o[1] ? o[2] : "Not quite. " + o[2] }; })
+    };
+  });
+
+  var CHECKS = [
+    ["Which of the two results do you think is more surprising?", "Do you understand?", "The first needs a real answer, so you learn something. The second almost always gets a polite yes."],
+    ["Can anyone think of a time this has happened to them?", "Is that clear?", "Linking the point to experience shows whether it was understood, and it builds interest."],
+    ["In one sentence, what do you think the author is warning us about?", "Everyone got that, right?", "A short summary from a listener tells you exactly what arrived."],
+    ["Would this result be the same in your country? Why, or why not?", "Any questions?", "A specific question starts a discussion. Any questions often produces silence."],
+    ["If you had to choose one method from this study for your own studying, which would it be?", "OK?", "Applying the finding needs understanding. OK needs nothing."],
+    ["What would retrieval practice look like the night before an exam?", "Do you know what retrieval practice is?", "Asking someone to use the term tests understanding. Asking whether they know it tests only confidence."],
+    ["Before I go on, which part should I explain again: the method or the results?", "Shall I continue?", "Offering two choices makes it easy for listeners to say what was unclear."],
+    ["Does anyone see a problem with a study of only one school?", "That makes sense, doesn't it?", "The first invites thinking. The second invites agreement."],
+    ["What do you think the author would say to someone who works twenty hours a week?", "Are you following me?", "A question that asks listeners to apply the author's view shows whether they understood it."],
+    ["Which of my three points do you find least convincing?", "Was that interesting?", "The first gives you useful information and starts a discussion. The second is a request for a compliment."]
+  ];
+  makeBank("bank-check", CHECKS, 4, pairQuestion);
+
+  // ---------- 07: first minute ----------
+  var STUDIES = [
+    { title: "Breaks and finishing time (invented)",
+      rows: [["Who", "160 university students, one term"], ["Method", "Half took a five-minute break every 30 minutes while studying. Half studied without breaks."], ["Finding", "The break group finished their weekly reading about 15 per cent sooner and made fewer mistakes in a short quiz."], ["Author's view", "The author argues that the common advice to study without stopping is wrong."], ["Limit", "Students chose which group to join."]],
+      model: "Many of us think the best way to study is to sit down and not stop until we finish. This study tested that idea with 160 university students over one term. Half of them took a five-minute break every half hour, and half did not. The message is simple: students who took short breaks finished sooner and made fewer mistakes. The author wants to correct a common belief, the idea that breaks waste time. My aim today is to explain the result and show you one reason to be careful with it, because the students chose their own group. Before I go on: how many of you usually study for more than an hour without a break?",
+      weak: "This article investigates the relationship between break-taking behaviour and task completion efficiency. The study had 160 participants. It shows that you should always take breaks. It is very interesting. Do you understand?",
+      why: "The model starts from the listeners' experience, gives the setting in one sentence, states the message at the right size, names the author's purpose (correcting a belief) and the speaker's own aim, and ends with a question that needs a real answer. The weak version opens with a written noun phrase, turns a finding into always, gives no purpose, judges the article as interesting instead of explaining it, and checks with a question that gets a polite yes." },
+    { title: "Language apps and speaking (invented)",
+      rows: [["Who", "90 adult learners of Spanish, eight weeks"], ["Method", "One group used an app for 20 minutes a day. One group met a speaking partner twice a week."], ["Finding", "The app group learned more new words. The speaking group improved more in a speaking test."], ["Author's view", "The author warns that apps alone may give learners a false sense of progress."], ["Limit", "Eight weeks is a short time."]],
+      model: "Most of us have used a language app at some point, so this study is about us. The researchers followed 90 adults learning Spanish for eight weeks. One group used an app every day, and the other met a speaking partner twice a week. The message is that apps help with words, but speaking partners help with speaking. The author's purpose is to warn us: if we only use an app, we may feel we are making progress when our speaking is not improving. I want to explain the two results and then ask what they mean for how we practise. Which of the two groups would you rather have been in, and why?",
+      weak: "Language apps are very popular and millions of people use them. The study had 90 participants over eight weeks and used a vocabulary test and a speaking test. The results were significant in both conditions. So language apps do not work. Any questions?",
+      why: "The model links the topic to the listeners, gives the setting briefly, states a two-part message that matches the finding, makes the author's warning visible and adds the speaker's own purpose. The weak version starts with background that says nothing about the study, uses significant and conditions without explaining them, draws a conclusion that contradicts the vocabulary result, and ends with an open question that often gets silence." },
+    { title: "Handwritten and typed notes (invented)",
+      rows: [["Who", "120 students in one lecture course"], ["Method", "Half took notes by hand, half on laptops. A test followed one week later."], ["Finding", "Laptop users remembered more exact wording. Handwriting users explained the ideas better."], ["Author's view", "The author informs readers about both effects and does not recommend one method."], ["Limit", "Only one lecture topic was tested."]],
+      model: "Do you take notes by hand or on a laptop? This study asked whether it makes a difference. In one lecture course, 120 students took notes either by hand or on a laptop, and a week later they took a test. The message is that each method helps with something different: laptops helped students remember exact words, and handwriting helped them explain the ideas. The author's purpose is mainly to inform. She does not tell us which method to choose. My aim is to explain the two results so that we can discuss which one matters more for the way we study. So, what do you think matters more in an exam: exact words, or ideas in your own words?",
+      weak: "The authors examined the differential effects of note-taking modality on retention. Handwriting is better than laptops. This proves that everyone should stop using laptops in lectures. The study used 120 students.",
+      why: "The model opens with a question to the listeners, gives the setting, states a balanced two-part message, and correctly names the purpose as informing. The weak version is written, not spoken, keeps only half of the finding, turns an informing text into a recommendation the author did not make, and gives the method detail at the end, where it no longer helps." },
+    { title: "Plants in offices (invented)",
+      rows: [["Who", "240 office workers in four offices, six months"], ["Method", "Two offices received plants. Two did not."], ["Finding", "No difference in the amount of work done. Workers with plants said they felt calmer and liked their office more."], ["Author's view", "The author argues that companies should value wellbeing even when output does not change."], ["Limit", "Feelings were measured with a short questionnaire."]],
+      model: "Imagine your workplace gets fifty new plants. Would you work harder? This study tried it in four offices with 240 workers over six months. Two offices got plants and two did not. The message is that the plants did not change how much people did, but they changed how people felt: workers with plants said they were calmer and liked their office more. The author uses this to persuade us that wellbeing matters even when output stays the same. My aim is to explain the result and to ask whether you agree with that argument. So, if a change makes people feel better but not work faster, is it worth paying for?",
+      weak: "Plants are good for people. This study shows that plants make workers more productive and happier. Plants are also cheap. The author is right, and all offices should buy plants.",
+      why: "The model uses a small scene to create interest, gives the setting, keeps the most important part of the finding (no change in output), and makes the author's persuasive purpose visible before the speaker's own. The weak version starts with a general opinion, reverses the finding about productivity, adds a claim about cost that is not in the study, and agrees with the author without explaining the argument." }
+  ];
+  (function(){
+    var root = document.getElementById("practice");
+    if (!root) return;
+    var holder = root.querySelector("[data-study]");
+    var area = root.querySelector("textarea");
+    var hint = root.querySelector(".counthint");
+    var checkwrap = root.querySelector("[data-checkwrap]");
+    var reveal = root.querySelector("[data-reveal]");
+    var verdict = root.querySelector("[data-verdict]");
+    var order = shuffle(STUDIES.map(function(_, i){ return i; }));
+    var pos = 0;
+    function show(){
+      var s = STUDIES[order[pos % order.length]];
+      holder.innerHTML = "";
+      var card = el("div", "study");
+      card.appendChild(el("h3", "", s.title));
+      var dl = el("dl");
+      s.rows.forEach(function(r){ dl.appendChild(el("dt", "", r[0])); dl.appendChild(el("dd", "", r[1])); });
+      card.appendChild(dl);
+      holder.appendChild(card);
+      area.value = "";
+      checkwrap.classList.add("hide");
+      checkwrap.querySelectorAll("input").forEach(function(c){ c.checked = false; });
+      verdict.classList.add("hide"); verdict.innerHTML = "";
+      hint.textContent = "Write at least two sentences to unlock the self-check.";
+    }
+    area.addEventListener("input", function(){
+      var sentences = (area.value.match(/[.!?](\s|$)/g) || []).length;
+      var ready = sentences >= 2 && area.value.trim().length >= 60;
+      checkwrap.classList.toggle("hide", !ready);
+      hint.textContent = ready ? "Now check your own text against the list below. Then read it aloud once." : "Write at least two sentences to unlock the self-check.";
+    });
+    reveal.addEventListener("click", function(){
+      var s = STUDIES[order[pos % order.length]];
+      verdict.innerHTML = "";
+      [["strong", "A strong first minute", s.model], ["weak", "A weak first minute", s.weak], ["why", "The difference", s.why]].forEach(function(v){
+        var d = el("div", v[0]); d.appendChild(el("b", "", v[1])); d.appendChild(document.createTextNode(v[2])); verdict.appendChild(d);
+      });
+      verdict.classList.remove("hide");
+    });
+    root.querySelector("[data-new]").addEventListener("click", function(){ pos++; show(); });
+    show();
+  })();
+
+})();
+
+</script>
+</body>
+</html>
